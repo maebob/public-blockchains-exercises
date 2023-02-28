@@ -2,7 +2,7 @@
 ////////////////////////
 
 // A Provider is a read-only connection to the blockchain, which allows
-// querying the blockchain state, such as accout, block or transaction
+// querying the blockchain state, such as account, block or transaction
 // details, querying event logs or evaluating read-only code using call.
 
 // See: https://docs.ethers.org/v6/getting-started/
@@ -12,11 +12,20 @@
 
 // Hint: As you did in file 1_wallet.
 
-// Your code here!
+require('dotenv').config();
+const ethers = require('ethers');
 
 
 // Exercise 1. Connect to Mainnet (a.k.a welcome async!).
 /////////////////////////////////////////////////////////
+
+let excercise = '1a';
+
+// Your code here!
+function exit() {
+  console.log(`Exercise ${excercise} completed.`);
+  process.exit(0);
+}
 
 // Whenever you interact with a blockchain you are in the "async" domain. 
 
@@ -41,8 +50,8 @@
 // Hint: check EthersJS docs for the method `JsonRpcProvider` and what 
 // parameters it needs (nested hint: you need something from the .env file).
 
-
-// Your code here!
+// Create the JSON RPC provider.
+const providerMainnet = new ethers.JsonRpcProvider(process.env.INFURA_MAINNET_API_URL + process.env.INFURA_KEY);
 
 
 // b. Verify that the network's name is "mainnet" and the chain id that theis 1.
@@ -59,22 +68,25 @@
 
 // This is an asynchronous anonymous self-executing function. It is a ugly
 // construct, but it allows you to use await inside its body.
-(async () => {
+// (async () => {
     
-    // Your code maybe here!
+//     // Your code maybe here!
 
-})();
+// })();
 
 // However, the async function could also be named, and the result is:
+excercise = '1b';
 const network = async () => {
     
-    // Your code here!
-
+    // Verify that the network is mainnet.
+    const net = await providerMainnet.getNetwork();
+    console.log(`Network name: ${net.name}`);
 };
 
 // which you can then call:
 
-// network();
+network();
+// exit();
 
 // The second (less compact) notation has the advantage that we can invoke
 // the code only when needed, so it is preferred in this exercise sheet.
@@ -96,13 +108,17 @@ const network = async () => {
 // with the value displayed on Etherscan.io.
 
 // // Look up the current block number
+blockNumber = 0;
+blockNumberGOERLI = 0;
 const blockNum = async () => {
     
-    // Your code here!
+    // Get the latest block number from the Ethereum mainnet.
+    blockNumber = await providerMainnet.getBlockNumber();
+    console.log(`Current block number: ${blockNumber}`);
 
 };
 
-// blockNum();
+blockNum();
 
 // b. The Ethereum mainnet is one of the most secure blockchains in the world.
 // The testnets of Ethereum are a bit less secure because they might have 
@@ -112,13 +128,16 @@ const blockNum = async () => {
 // Connect to the Goerli test net, get the latest block number and print
 // the difference in chain length with mainnet.
 
+const providerGOERLI = new ethers.JsonRpcProvider(process.env.INFURA_GOERLI_API_URL + process.env.INFURA_KEY);
 
 // Look up the current block number in Mainnet and Goerli.
 const blockDiff = async () => {
-
+    blockNumberGOERLI = await providerGOERLI.getBlockNumber();
+    console.log(`Current block number in Goerli: ${blockNumberGOERLI}`);
+    console.log(`Difference in chain length: ${blockNumberGOERLI - blockNumber}`)
 };
 
-// blockDiff();
+blockDiff();
 
 
 // Exercise 3. Block time.
@@ -141,7 +160,7 @@ const checkBlockTime = async (providerName = "mainnet", blocks2check = 3) => {
 
     // JS Ternary Operator.
     let provider = providerName.toLowerCase() === "mainnet" ? 
-        mainnetProvider : goerliProvider;
+        providerMainnet : providerGOERLI;
 
     // Get initial block number and timestamp.
     let d = Date.now();
@@ -207,6 +226,17 @@ const checkBlockTime2 = async (providerName = "mainnet", blocks2check = 3) => {
 
 // a. Look up the last block in Mainnet and print it to console.
 // Hint: first get the last block number, and then use .getBlock(blockNumber).
+const lastBlockInfo = async () => {
+
+    lastBlockNo = await providerMainnet.getBlockNumber();
+    lastBlock = await providerMainnet.getBlock(lastBlockNo);
+    console.log(lastBlock);
+};
+
+lastBlockInfo();
+
+
+
 
 // b. How many transactions does the block contains?
 
