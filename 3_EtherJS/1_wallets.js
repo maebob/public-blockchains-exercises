@@ -194,14 +194,21 @@ console.log("Address:", wallet.address);
 console.log("Private key:", wallet.privateKey);
 console.log("Mnemonic:", wallet.mnemonic.phrase);
 
-exit();
+//exit();
 
 // b. Bonus. Print the derivation path of the wallet and check that it is
 // equal to `baseDevPath`. 
 
 exercise = '4b';
 
-let baseDevPath = "m/44'/60'/0'/0/";
+baseDevPath = "m/44'/60'/0'/0/0";
+
+if(wallet.path === baseDevPath){
+    console.log('The paths are the same.')
+} else {
+    console.log('The paths are different.')
+    console.log(wallet.path)
+}
 
 // Wait is the derication path? 
 // Basically, the mnemonic alone isn't enough to determine an address
@@ -211,12 +218,12 @@ let baseDevPath = "m/44'/60'/0'/0/";
 // https://vault12.com/securemycrypto/crypto-security-basics/what-is-bip39/
 
 
-console.log("Derivation path:", wallet.path);
+// console.log("Derivation path:", wallet.path);
 
 // Your code here!
 
 
-// exit();
+exit();
 
 // Exercise 5. Bonus. Create a Hierarchical Deterministic Wallet.
 /////////////////////////////////////////////////////////////////
