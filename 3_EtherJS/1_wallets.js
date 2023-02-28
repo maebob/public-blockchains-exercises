@@ -39,8 +39,8 @@
 // be executed, until you tell the process to stop. 
 
 // This line will tell the process to stop.
-process.exit(0);
-console.log('I am sad line...I will not be printed to console :(');
+// process.exit(0);
+// console.log('I am sad line...I will not be printed to console :(');
 
 // a. Move the sad line above and below `process.exit(0);` to check that the
 // process stops where it is intended to. When you are done, comment out both
@@ -54,6 +54,10 @@ console.log('I am sad line...I will not be printed to console :(');
 let exercise = 0;
 
 // Your code here!
+function exit() {
+  console.log(`Exercise ${exercise} completed.`);
+  process.exit(0);
+}
 
 // c. Bonus. Did you realize that JavaScript/Node.JS has three different ways
 // of declaring a function?
@@ -90,7 +94,7 @@ exercise = 1;
 
 require('dotenv').config();
 
-// exit();
+//exit();
 
 // Exercise 2. Create .env file.
 ////////////////////////////////
@@ -113,7 +117,7 @@ exercise = 2;
 // See if it worked.
 console.log(process.env);
 
-// exit();
+//exit();
 
 // Exercise 3. Check the content of the .env file.
 //////////////////////////////////////////////////
@@ -127,9 +131,11 @@ exercise = '3a';
 // if statement that print a warning message if empty.
 // Hint: https://javascript.info/ifelse
 
-// Your code here!
+if (process.env.METAMASK_ACCOUNT_1 == '') {
+    console.log('Warning: METAMASK_ACCOUNT_1 is empty!');
+}
 
-// exit();
+//exit();
 
 // b. Create an array with all the names of the variables written in the .env
 // file. Then print the lenght of the array.
@@ -137,9 +143,18 @@ exercise = '3a';
 
 exercise = '3b';
 
-// Your code here!
+const variablesToCheck = [
+    'METAMASK_ACCOUNT_1',
+    'METAMASK_ACCOUNT_2',
+    'ALCHEMY_API_KEY',
+    'INFURA_API_KEY',
+    'ETHERSCAN_API_KEY',
+];
 
-// exit();
+console.log(variablesToCheck.length);
+
+
+//exit();
 
 // c. Loop through all the elements of the array and check that the variable
 // is set and non-empty under `process.env`.
@@ -147,11 +162,13 @@ exercise = '3b';
 // Hint1: You can implement a for-loop or use the .forEach routine.
 // Hint2: `process.env` is an object, if you don't know how to access its 
 // field, read here: https://javascript.info/object
-
+exercise = '3c';
 
 // Solution 1. forEach.
 variablesToCheck.forEach(v => {
-    // Your code here!
+    if (process.env[v] == '') {
+        console.log(`Warning: ${v} is empty!`);
+    }
 });
 
 // Solution 2. For-loop.
@@ -159,7 +176,7 @@ variablesToCheck.forEach(v => {
 // Your code here!
 
 
-// exit();
+//exit();
 
 
 // Exercise 4. Create a Random Wallet.
@@ -171,9 +188,13 @@ const ethers = require("ethers");
 // a. Create a random wallet and print the address, the private key,
 // and the mnenomic phrase.
 // Hint: ethers.Wallet.createRandom();
+wallet = ethers.Wallet.createRandom();
 
+console.log("Address:", wallet.address);
+console.log("Private key:", wallet.privateKey);
+console.log("Mnemonic:", wallet.mnemonic.phrase);
 
-// exit();
+exit();
 
 // b. Bonus. Print the derivation path of the wallet and check that it is
 // equal to `baseDevPath`. 

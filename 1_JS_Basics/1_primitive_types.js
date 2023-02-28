@@ -85,26 +85,26 @@ console.log(typeof undefined);
 
 // EXERCISE 1. Computations.
 ////////////////////////////
-
+console.log('EXERCISE 1. Computations:');
 // Perform the following computations and store the results in four
 // separate variables named a, b, c, and d.
 // Multiply these variables to obtain the size of the population
 // of the city of Luzern as reported by Wikipedia Eng. as of 03.06.2020.
 
 // a. Compute (18 + 107) / (5 * 25)
-
+a = (18 + 107) / (5 * 25);
 console.log(a);
 
 // b. Compute the square root of one million.
-
+b = Math.sqrt(1000000);
 console.log(b);
 
 // c. Take the remainder of the division betwen 123 and 9 squared, minus 1.
-
+c = Math.pow((123%9), 2) - 1;
 console.log(c);
 
 // d. Take the integer part of the float number 2.123456789 (need to use Math).
-
+d = Math.floor(2.123456789);
 console.log(d);
 
 // Now compute:
@@ -141,11 +141,12 @@ console.log(luzernPopulation);
 // a. Generate a random number between 0 and 1, and store its value
 // in a variable (and pick a proper name for the variable!).
 // Hint. The Math object is your friend.
-
+randomNumber = Math.random();
 
 // b. Update the variable so that the value of the random number is
 // between 0 and the one hundred thoudands.
 
+randomNumber = Math.randint(0, 100000);
 
 // EXERCISE 4. Conditionals.
 ////////////////////////////
@@ -158,6 +159,13 @@ console.log(luzernPopulation);
 // otherwise print "Few but good!"
 // Hint: Use console.log to print.
 
+if (randomNumber > luzernPopulation) {
+  console.log("Go Luzern!");
+} else if (randomNumber == luzernPopulation) {
+    console.log("Are we in the Matrix?");
+} else {
+    console.log("Few but good!");
+}
 
 // EXERCISE 5. String manipulation.
 ///////////////////////////////////
@@ -166,11 +174,11 @@ console.log(luzernPopulation);
 // named finalStr.
 str1 = "Always remember that you are absolutely unique.";
 str2 = 'Just like everyone else.';
-
+finalStr = str1 + ' ' + str2;
 
 // b. Did you remember to add a space between them?
 // If so, how many characters is the final string?
-
+console.log(finalStr.length);
 
 // c. Did you know that you can also join strings and numbers together?
 // Replace str2 with a new sentence that includes the total population count
@@ -179,6 +187,8 @@ str2 = 'Just like everyone else.';
 // Then, join it with str1 and update finalStr.
 // Important. String must end with a dot (needed for exercise below).
 
+str2 = 'Just like other ' + luzernPopulation + ' persons in Luzern.';
+finalStr = str1 + ' ' + str2;
 
 // d. Alternatively, you can specify strings using the backtick sign `
 // which allows for in-string variable substitution.

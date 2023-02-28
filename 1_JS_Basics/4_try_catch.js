@@ -34,7 +34,14 @@ console.log(typeof NaN);
 // a special return value with a warning on console.log.
 
 function divideNumbers(a, b) {
-    // Your code here.
+    if(typeof a !== 'number' || typeof b !== 'number') {
+        console.log('Invalid input parameters.');
+        return null;
+    } else if(b === 0) {
+        console.log('Cannot divide by zero.');
+    } else {
+        return a / b;
+    }
 }
 
 divideNumbers('what', {});
@@ -64,13 +71,17 @@ judgePerson(brendan);
 // we catch it with a try and catch statement and print an error message.
 
 function judgePerson(person, cb) {
-    // Your code here.
+    try {
+        let str = person.first + ' ' + person.last + cb()
+        console.log(str);
+    } catch (e) {
+        console.log('Error: ' + e);
+    }
 }
 
 brendan = { first: 'Brendan', last: 'Eich', year: 1961 };
 judgePerson(brendan);
 judgePerson(brendan, function() { return ' impacted my life.'; });
-
 
 // Great work! You finish the fourth exercise sheet!
 // You are ready for final exercise of Part 1 first!

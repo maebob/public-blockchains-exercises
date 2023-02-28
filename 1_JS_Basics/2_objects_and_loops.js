@@ -48,16 +48,19 @@ console.log(typeof null);
 // decided that the type of null is 'object'.
 // Hint. The property name must contain the full name (Brendan Eich), and
 // the property birth must contain the year in which he was born (1961).
+person = {name : 'Brendan Eich',
+        year : 1961}
 
 // b. Access the properties of the person object.
-
+console.log(person.name)
+console.log(person.year)
 
 // EXERCISE 2. Add and remove properties to the person object.
 //////////////////////////////////////////////////////
 
 // Now you realize that it makes more sense to split the property 'name' into
 // two: 'first' and 'last' name. Accordingly you delete the propery name.
-
+delete person.name;
 
 // EXERCISE 3. Create an array of persons.
 //////////////////////////////////////////
@@ -65,15 +68,21 @@ console.log(typeof null);
 // a. Create an array called persons containing three items.
 // You already have Brendan, now add another two inspiring personalities.
 // For example, Pablo Picasso and Napoleon Bonaparte. When are they born?
+persons = [{first : 'Brendan', last : 'Eich', year : 1961},
+            {first : 'Pablo', last : 'Picasso', year : 1881},
+            {first : 'Napoleon', last : 'Bonaparte', year : 1769}]
 
 // b. Count how many elements are in the array.
+console.log(persons.length)
 
 // c. Access the second element of the array.
+console.log(persons[1])
 
 // Arrays are 0-indexed, that is the first element has index 0,
 // the second element 1, and so on.
 
 // d. Access the property year of the second element of the array.
+console.log(persons[1].year)
 
 // EXERCISE 4. Pick a random item in the array of persons.
 //////////////////////////////////////////////////////////
@@ -81,7 +90,7 @@ console.log(typeof null);
 // Hint. Generate a random number between 0 and the total
 // number of elements in the array, then "floor" it with the corresponding
 // method of the Math object.
-// randomNumber = ... 
+randomNumber = Math.floor(Math.random() * persons.length); 
 console.log(persons[randomNumber]);
 
 // EXERCISE 5. Add a new elements to the array of persons.
@@ -95,6 +104,8 @@ console.log(persons[randomNumber]);
 // Hint: There are a couple of ways of achieving this, depending to where
 // you would like to add the element. For instance the method `push`
 // will add at the bottom of the array.
+new_person = {first : 'Phil', last : 'Katz', year : 1962}
+persons.push(new_person);
 
 // Verify that you added at the bottom.
 console.log(persons[3]);
@@ -105,7 +116,9 @@ console.log(persons[3]);
 // Maybe you hurried too much with Phil Katz. What about
 // replacing him with Linus Torvalds (1969) instead?
 // Hint: simply assign a new value at a given array index.
-
+persons[3].first = 'Linus';
+persons[3].last = 'Torvalds';
+persons[3].year = 1969;
 // Verify who is the bottom of the array.
 console.log(persons[3]);
 
@@ -128,12 +141,14 @@ console.log(persons);
 
 // "Where there is an array there is a loop" is a famous adagio. Actually,
 // I just made it up, but indeed, loops are a fundamental part of
-// evey computer language. Let's try them out.
+// every computer language. Let's try them out.
 
 // a. Loop through the elements of the persons array and print only the year
 // in which the persons are born.
 // Hint: use console.log to print. Use let when you define the iterating index.
-
+for (i = 0; i < persons.length; i++) {
+    console.log(persons[i].year);
+}
 
 // b. This time you want to create a short paragraph which verbosely
 // describes the content of the person array. The final paragraph should look
@@ -144,7 +159,16 @@ console.log(persons);
 // you loop through the items in the array.
 // Hint2: You will also need some if logic to correctly add or not the comma
 // between the first and the second element and finishing with a dot.
-
+text = 'There are ' + persons.length + ' elements in the array: ';
+for (i = 0; i < persons.length; i++) {
+    text += 'element ' + (i+1) + ' is ' + persons[i].first + ' ' + persons[i].last + ', born in ' + persons[i].year;
+    if (i < persons.length - 1) {
+        text += ', ';
+    } else {   
+        text += '.';
+    }
+}
+console.log(text);
 // c. bonus. Can you replace the part "element 1" with "the first element" and
 // "element 2" with the "second element" and so on?
 
@@ -166,6 +190,12 @@ console.log(persons);
 // (however the order might be different).
 // Hint: in this exercise objects behave like arrays, but instead of a
 // numeric index, you use the property name.
+brendan = persons[0];
+for (property in brendan) {
+    if (brendan.hasOwnProperty(property)) {
+        console.log(property + ': ' + brendan[property]);
+    }
+}
 
 
 // EXERCISE 10. Bonus. Constant objects.

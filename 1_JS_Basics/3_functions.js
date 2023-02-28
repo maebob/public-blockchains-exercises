@@ -10,6 +10,9 @@
 
 // Create a function named printMyName that prints out your name.
 // Verify its type and invoke it.
+function printMyName() {
+    console.log('Peter Pan');
+}
 
 
 // Notice that camel case naming applies also to functions.
@@ -24,7 +27,10 @@ printMyName();
 // input parameter and prints a sentence containing the name. For instance:
 // printSentence('Brendan');
 // 'Brendan is great!'.
-
+function printSentence(firstName) {
+    console.log(firstName + ' is the best!');
+}
+printSentence('Brendan');
 
 // b. Modify the printSentence function so that it takes an object of the
 // type you createed in the "Objects and loops" exercise and compose a
@@ -36,7 +42,7 @@ printMyName();
 // the brendan object from Exercise Sheed 2 here.
 
 function printSentence(person) {
-    // Add code here
+    console.log(person.first + ' ' + person.last + ' is born in ' + person.year + ' and he is great!');
 }
 personObject = { first: 'Brendan', last: 'Eich', year: 1961 };
 printSentence(personObject);
@@ -47,7 +53,11 @@ printSentence(personObject);
 // Hint: use the ternary operator ? for a more compact function.
 
 function printSentence2(person1, person2) {
-    // Add code here.
+    if(person1.year < person2.year) {
+        console.log(person1.first + ' ' + person1.last + ' is born in ' + person1.year + ' and they are great!');
+    } else {
+        console.log(person2.first + ' ' + person2.last + ' is born in ' + person2.year + ' and they are great!');
+    }
 }
 brendan = { first: 'Brendan', last: 'Eich', year: 1961 };
 linus = { first: 'Linus', last: 'Torvalds', year: 1969 };
@@ -64,7 +74,19 @@ printSentence2(brendan, linus);
 // Create two functions. One returns the person object that is the youngest,
 // the second one prints it.
 // Hint: combine the return statement and the ternary operator for a one-liner.
+function whoIsYounger(person1, person2) {
+    if(person1.year < person2.year) {
+        return person1;
+    } else {
+        return person2;
+    }
+}
 
+function printYoungest(person1, person2) {
+    console.log(whoIsYounger(person1, person2).first + ' ' + whoIsYounger(person1, person2).last + ' is born in ' + whoIsYounger(person1, person2).year + ' and they are great!');
+}
+
+printYoungest(brendan, linus);
 
 // EXERCISE 3 Scope.
 ////////////////////
@@ -148,6 +170,8 @@ console.log(privateVariableDollB); // Will throw an error.
 
 // a. Create a function that takes in input a person object and another
 // function and prints a string accordingly.
+brendan = { first: 'Brendan', last: 'Eich', year: 1961 };
+linus = { first: 'Linus', last: 'Torvalds', year: 1969 };
 
 function isGreat() {
     return ' is great.';
@@ -156,7 +180,7 @@ function isNotGreat() {
     return ' who?';
 }
 function judgePerson(person, cb) {
-    // Your code here.
+    console.log(person.first + ' ' + person.last + cb());
 }
 
 judgePerson(brendan, isGreat);
@@ -178,9 +202,10 @@ judgePerson(brendan, isNotGreat);
 // youngest to older.
 persons = [ brendan, linus ];
 
-persons.sort(
-    // Define a comparator function in here.
-);
+persons.sort(function(a, b) {
+    if (a.year < b.year) return 1;
+    return -1;
+});
 console.log(persons);
 
 

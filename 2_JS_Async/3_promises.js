@@ -30,7 +30,7 @@
 // Let's write a function that is _on average_ accurate in guessing
 // if you are sleeping with a comfort object.
 
-let comfortObj = 1/3;
+comfortObj = 1/3;
 
 let promise = new Promise(function(resolve, reject) {
   if (Math.random() <= comfortObj) resolve(true);
@@ -40,7 +40,7 @@ let promise = new Promise(function(resolve, reject) {
 console.log('Do you sleep with a Teddy bear?');
 promise
   .then(res => console.log(`Yes, you are!`))
-  .catch(res => console.log(`No, you are not.`));
+  .catch(res => console.log(`No, you do not.`));
 
 
 // Ok, isn't this section for async code? The example above is synchronous!
@@ -50,7 +50,7 @@ promise
 // Now implement the example above in an async way.
 // Hint: setTimeout
 
-let comfortObj = 1/3;
+comfortObj = 1/3;
 
 promise = new Promise(function(resolve, reject) {
   // Write the body of this promise.
@@ -75,7 +75,7 @@ promise
 // Use the finally statement to set the value of exerciseIsOver to true,
 // and if it is true and report the value to console.
 
-let comfortObj = 1/3;
+comfortObj = 1/3;
 let exerciseIsOver = false;
 
 promise = new Promise(function(resolve, reject) {

@@ -15,7 +15,7 @@
 
 obj = {};
 // An empty object.
-console.log(typeof obj);
+console.log("type of obj: " + typeof obj);
 // Objects are containers for variables indexed by a key (in other programming
 // languages they may be called maps or dictionaries). They can contain
 // variables of any type inside.

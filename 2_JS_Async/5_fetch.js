@@ -38,10 +38,10 @@
 const fetch = require("node-fetch");
 
 // API address.
-const ENDPOINT = "https://swapi.dev/api/";
+ENDPOINT = "https://swapi.dev/api/";
 
 // Change me.
-let query = 'people/1/';
+query = 'people/5/';
 
 fetch(ENDPOINT + query)
   .then(res => {
@@ -72,10 +72,32 @@ fetch(ENDPOINT + query)
 // Let's do it again with the async/await pattern.
 
 const fetch = require("node-fetch");
-const ENDPOINT = "https://swapi.dev/api/";
+ENDPOINT = "https://swapi.dev/api/";
 
-// Change me.
-let query = 'YOU_NEED_TO_CHANGE_THIS';
+query = 'people/6/';
+
+(async() => {
+
+  try {
+    const res = await fetch(ENDPOINT + query);
+
+    if (res.status >= 400) {
+      throw new Error("Bad response from server");
+    }
+
+    const user = await res.json();
+
+    console.log('We got ASYNC/AWAIT: ', user.name);
+
+  }
+  catch(err) {
+    console.error(err);
+  }
+  finally {
+    console.log('Done');
+  }
+
+})();
 
 // Hint: remember that await can be used only inside an async function.
 // If needed, you may create an anonimous async function.
@@ -101,11 +123,11 @@ let query = 'YOU_NEED_TO_CHANGE_THIS';
 // Ref: https://javascript.info/recursion
 
 const fetch = require("node-fetch");
-const ENDPOINT = "https://swapi.dev/api/";
-let query = "people/";
+ENDPOINT = "https://swapi.dev/api/";
+query = "people/";
 
-let db = [];
-let page = 1;
+db = [];
+page = 1;
 
 
 // b. Now let's do it with the async/await pattern.
@@ -113,11 +135,11 @@ let page = 1;
 // Hint: you may use a while loop.
 
 const fetch = require("node-fetch");
-const ENDPOINT = "https://swapi.dev/api/";
-let query = "people/";
+ENDPOINT = "https://swapi.dev/api/";
+query = "people/";
 
-let db = [];
-let page = 1;
+db = [];
+page = 1;
 
 
 

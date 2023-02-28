@@ -13,11 +13,11 @@
 ///////////////////////////
 
 // This is a plain, normal, boring function.
-let hello = () => { return "Hello" };
+hello = () => { return "Hello" };
 hello();
 
 // This is a really cool, brand new, async function.
-let hello = async () => { return "Hello" };
+hello = async () => { return "Hello" };
 hello();
 
 // They might look similar, but the async function has superpowers:
@@ -38,7 +38,7 @@ hello().then(console.log);
 
 
 // Let's make hello really async now.
-let hello = async () => { 
+hello = async () => { 
   let promise = new Promise((resolve, reject) => {
     setTimeout(() => resolve("Hello"), 1000);
   });
