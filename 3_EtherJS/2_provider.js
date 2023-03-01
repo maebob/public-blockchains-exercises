@@ -347,8 +347,15 @@ const linkABI = require('./link_abi.json');
 
 const link = async () => {
    
-    // Your code here!
+    // Create a new smartContrac object.
+    smartContract = new ethers.Contract(linkAddress, linkABI, providerGOERLI);
+
+    // Invoke the smart contract method.
+    bal1 = await smartContract.balanceOf('unima.eth');
+    console.log('Balance of Unima: ', ethers.formatEther(bal1));
+
+    bal2 = await smartContract.balanceOf('vitalik.eth');
+    console.log('Balance of Vitalik: ', ethers.formatEther(bal2));
 };
 
-
-// link();
+link();
