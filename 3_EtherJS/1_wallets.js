@@ -92,9 +92,7 @@ exercise = 1;
 
 // Hint3: don't forget to uncomment the call to `exit()`.
 
-require('dotenv').config();
-
-//exit();
+// exit();
 
 // Exercise 2. Create .env file.
 ////////////////////////////////

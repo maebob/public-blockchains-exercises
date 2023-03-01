@@ -231,14 +231,23 @@ const lastBlockInfo = async () => {
     lastBlockNo = await providerMainnet.getBlockNumber();
     lastBlock = await providerMainnet.getBlock(lastBlockNo);
     console.log(lastBlock);
+    return lastBlockNo;
 };
 
-lastBlockInfo();
+lastBlockNo = lastBlockInfo();
 
 
 
 
 // b. How many transactions does the block contains?
+const transactionCount = async () => {
+
+    lastBlockNo = await providerMainnet.getBlockNumber();
+    lastBlock = await providerMainnet.getBlock(lastBlockNo);
+    console.log('Number of transactions in the last block: ', lastBlock.transactions.length);
+};
+
+transactionCount();
 
 // c. Pick a transaction and examine its receipt.
 // Hint: use getTransactionReceipt().
