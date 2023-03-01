@@ -272,7 +272,7 @@ const blockInfo = async () => {
 
 };
 
-blockInfo();
+// blockInfo();
 
 // Exercise 5. ENS names.
 //////////////////////////
@@ -280,13 +280,13 @@ blockInfo();
 // Resolve the name 'unima.eth' on the Goerli network, then lookup the
 // address.
 
-const ens = async () => {
+const ensUnima = async () => {
     
-    // Your code here!
-
+    // Get the ENS registry address.
+    const registryAddress = await providerGOERLI.resolveName('unima.eth');
 };
 
-// ens();
+ensUnima();
 
 
 // Exercise 6. Get ETH balance.
@@ -304,14 +304,20 @@ const ens = async () => {
 // creator of Ethereum? 
 // Hint: try vitalik.eth
 
-const balance = async (ensName = "unima.eth") => {
-
-   // Your code here!
-
-};
-
 // balance("vitalik.eth");
 
+
+const balanceUniMa = async (ensName = "maebob.eth") => {
+
+    bal1 = await providerGOERLI.getBalance(ensName);
+    console.log('Balance of maebob.eth: ', ethers.formatEther(bal1), ' ETH');
+
+    resolvedName = await providerGOERLI.resolveName(ensName);
+    bal2 = await providerGOERLI.getBalance(resolvedName);
+    console.log('Balance of ', resolvedName, ': ', ethers.formatEther(bal2), ' ETH');
+};
+
+balanceUniMa();
 
 // Exercise 7. Get ERC20 Balance.
 /////////////////////////////////
@@ -346,5 +352,3 @@ const link = async () => {
 
 
 // link();
-
-
