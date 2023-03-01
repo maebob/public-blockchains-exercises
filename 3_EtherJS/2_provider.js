@@ -230,7 +230,7 @@ const lastBlockInfo = async () => {
 
     lastBlockNo = await providerMainnet.getBlockNumber();
     lastBlock = await providerMainnet.getBlock(lastBlockNo);
-    console.log(lastBlock);
+    // console.log(lastBlock);
     return lastBlockNo;
 };
 
@@ -247,21 +247,32 @@ const transactionCount = async () => {
     console.log('Number of transactions in the last block: ', lastBlock.transactions.length);
 };
 
-transactionCount();
+// transactionCount();
 
 // c. Pick a transaction and examine its receipt.
 // Hint: use getTransactionReceipt().
+
+const transactionReceipt = async () => {
+    lastBlockNo = await providerMainnet.getBlockNumber();
+    lastBlock = await providerMainnet.getBlock(lastBlockNo);
+    receipt = await providerMainnet.getTransactionReceipt(lastBlock.transactions[0]);
+    console.log(receipt);
+};
+
+// transactionReceipt();
 
 // d. Transactions can be prefetched, so that you save one blockchain call.
 // Hint: pass `true` as second parameter to .getBlock(blockNumber, true).
 
 const blockInfo = async () => {
     
-    // Your code here!
+    lastBlockNo = await providerMainnet.getBlockNumber();
+    lastBlock = await providerMainnet.getBlock(lastBlockNo, true);
+    console.log(lastBlock.prefetchedTransactions);
 
 };
 
-// blockInfo();
+blockInfo();
 
 // Exercise 5. ENS names.
 //////////////////////////
