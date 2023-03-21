@@ -19,11 +19,13 @@
 // a. Require the `dotenv` and `ethers` packages.
 // Hint: As you did in file 1_wallet and 2_provider.
 
-// Your code here!
+require('dotenv').config();
+const { FeeData } = require('ethers');
+const ethers = require('ethers');
 
 // b. Create a Goerli provider.
 
-// Your code here!
+const providerGOERLI = new ethers.JsonRpcProvider(process.env.INFURA_GOERLI_API_URL + process.env.INFURA_KEY);
 
 // Exercise 1. Create a Signer.
 ///////////////////////////////
@@ -39,16 +41,25 @@
 // Hint: a signer is a wallet.
 // Hint2: if you get an error here, check that the private key begins with "0x".
 
-// Your code here!
+let signer = new ethers.Wallet(process.env.METAMASK_1_PRIVATE_KEY);
+console.log(signer.address);
 
 // Exercise 2. Sign something.
 //////////////////////////////
 
 const sign = async (message = 'Hello world') => {
     
-    // Your code here!
-};
+    signature = await signer.signMessage(message);
 
+    verifiedSigner = ethers.verifyMessage(message, signature);
+    
+    if (verifiedSigner === signer.address) {
+        console.log('Signature is valid.');
+    }
+    else {
+        console.log('Signature is NOT valid.');
+    }
+};
 // sign();
 
 // Exercise 3. Connect to the blockchain. 
@@ -61,11 +72,14 @@ const sign = async (message = 'Hello world') => {
 // Hint: .getNonce()
 
 const connect = async() => {
+
+    signer = await signer.connect(providerGOERLI);
+    nonce = await signer.getNonce();
     
-    // Your code here!
+    console.log('Next nonce:', nonce);
 };
 
-// connect();
+connect();
 
 // c. Replace the signer created above at exercise 1 with one that takes the 
 // Goerli provider as second parameter. This is necessary even
@@ -74,7 +88,7 @@ const connect = async() => {
 // and the remaning of the exercises. If unclear, just check the solution :)
 
 // Replace the signer created above.
-
+signer = new ethers.Wallet(process.env.METAMASK_1_PRIVATE_KEY, providerGOERLI);
 
 
 // Exercise 4. Send a transaction.
@@ -98,10 +112,33 @@ const account2 = process.env.METAMASK_2_ADDRESS;
 
 const sendTransaction = async () => {
 
-    // Your code here!
+    let b1 = await providerGOERLI.getBalance(signer.address);
+    let b2 = await providerGOERLI.getBalance("0xbDf5190D69d760bCb4D216d751563cD2936559C7");
+    b1 = ethers.formatEther(b1);
+    b2 = ethers.formatEther(b2);
+
+    transaction = await signer.sendTransaction({
+        to: account2,
+        value: ethers.parseEther("0.011")
+    });
+
+    // console.log(tx);
+    
+    console.log('Transaction is in the mempool...');
+    await transaction.wait();
+
+    console.log('Transaction mined!');
+
+    let updatedB1 = await providerGOERLI.getBalance(signer.address);
+    let updatedB2 = await providerGOERLI.getBalance(account2);
+    updatedB1 = ethers.formatEther(updatedB1);
+    updatedB2 = ethers.formatEther(updatedB2);
+
+    console.log('Balance for', signer.address, 'changed from', b1, 'to', updatedB1);
+    console.log('Balance for', account2, 'changed from', b2, 'to', updatedB2);
 };
 
-// sendTransaction();
+sendTransaction();
 
 
 // Exercise 5. Meddling with Gas.
@@ -167,10 +204,24 @@ const sendTransaction = async () => {
 // a, b, c. 
 const checkGasPrices = async () => {
 
-    // Your code here!
+    transaction = await signer.populateTransaction({
+        to: account2,
+        value: ethers.parseEther("0.001")
+    });
+
+    feeData = await providerGOERLI.getFeeData();
+
+    // Comprae fee data to the data from populateTransaction()
+    console.log('Fee data:', feeData);
+    console.log('Populate transaction:', transaction);
+
+    // Get base fee from previous block
+    block = await providerGOERLI.getBlock("latest");
+    baseFee = block.baseFeePerGas;
+    console.log('Base fee of the latest block:', baseFee);
+
 
 };
-
 // checkGasPrices();
 
 // d. Now that you understand everything, send a new transaction that is just
@@ -189,7 +240,7 @@ const checkGasPrices = async () => {
 // d. e.
 const sendCheaperTransaction = async () => {
 
-    // Your code here!
+    
 
 };
 

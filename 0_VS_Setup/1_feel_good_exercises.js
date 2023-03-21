@@ -147,7 +147,7 @@ console.log(a);
 // bracket get highlighted?
 
 if (b + c > 1) {
-  console.log("Hei!");
+  console.log("Hi!");
 }
 
 // b. That was easy. In more complicated cases, you might want to use a
